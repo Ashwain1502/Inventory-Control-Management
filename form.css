@@ -1,0 +1,46 @@
+
+
+.header{
+    display: flex;
+    color: #f1f1f1;
+    background-color:#2b3039;
+    padding-bottom: 2rem;
+}
+
+.main{
+    padding-left: 37.5%;
+    display: block;
+    padding-top: 2rem;
+
+}
+
+label{
+    display: block;
+    width: 200px;
+    color: #2b3039;
+    font-size: 25px;
+}
+
+input{
+    font-size: 25px;
+    background-color: bisque;
+    outline: none;
+    border:1px solid #2b3039;
+    color: #2b3039;
+    width: 400px;
+
+}
+button{
+    background-color: rgb(3, 19, 167);
+    color: aliceblue;
+    font-size: 25px;
+    border: 1px solid #2b3039;
+    width: 200px;
+}
+
+.btn{
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+}

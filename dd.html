@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Button Click Listener</title>
+</head>
+<body>
+  <button id="myButton">Click Me</button>
+  <table id="data-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+     const tableBody = document.querySelector('#data-table tbody');
+    const button = document.getElementById('myButton');
+
+    button.addEventListener('click', () => {
+      // Code to be executed when the button is clicked
+      console.log('Button clicked!');
+      // Add any other actions or function calls you want to trigger
+      fetch('/data')
+      .then(response => response.json())
+      .then(data => {
+        // Clear previous table data
+        tableBody.innerHTML = '';
+
+        // Populate table with fetched data
+        data.forEach(row => {
+          const newRow = document.createElement('tr');
+          newRow.innerHTML = `
+            <td>${row.productId}</td>
+            <td>${row.productName}</td>
+            <td>${row.stock}</td>
+          `;
+          tableBody.appendChild(newRow);
+        });
+      })
+      .catch(error => console.error('Error fetching data:', error));
+    });
+  </script>
+</body>
+</html>
