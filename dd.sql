@@ -199,17 +199,151 @@ VALUES (12, 6, 4, 9, '2023-02-27');
 INSERT INTO Order_Details (orderId, productId, userId, quantity, orderDate)
 VALUES (13, 7, 8, 4, '2022-10-12');
 
+CREATE TABLE ReturnProducts (
+  returnId INT PRIMARY KEY,
+  productId INT,
+  quantity INT,
+  returnDate DATE,
+  userId INT,
+  FOREIGN KEY (productId)
+    REFERENCES Products(productId)
+    ON DELETE CASCADE,
+  FOREIGN KEY (userId)
+    REFERENCES user(userid)
+    ON DELETE CASCADE
+);
+
+-- Create the trigger
+CREATE TRIGGER increase_stock_on_return
+AFTER INSERT ON ReturnProducts
+FOR EACH ROW
+UPDATE Products
+SET stock = stock + NEW.quantity
+WHERE productId = NEW.productId; 
+
+INSERT INTO ReturnProducts (returnId, productId, quantity, returnDate, userId)
+VALUES
+  (5, 3, 1, '2023-05-21', 1),
+  (6, 10, 2, '2023-05-22', 2),
+  (7, 14, 4, '2023-05-23', 2),
+  (8, 6, 3, '2023-05-24', 1),
+  (9, 17, 1, '2023-05-24', 2),
+  (10, 2, 2, '2023-05-25', 1);
+
+
+
+
+
 
 select * from Products;
+select * from category;
 select * from Order_Details order by orderDate;
-  
+select * from user;  
+
+show profiles;  
+show table status;
   
 
 
 -- Important Parameters Meta Data Queries 
-SELECT *
+SELECT TABLE_NAME, CARDINALITY,INDEX_TYPE, COLUMN_NAME 
+FROM INFORMATION_SCHEMA.STATISTICS
+WHERE TABLE_SCHEMA = 'InventoryControlManagement';
+
+SHOW TABLE STATUS LIKE 'InventoryControlManagement';
+
+SELECT TABLE_NAME,ENGINE, VERSION,AVG_ROW_LENGTH,DATA_LENGTH,INDEX_LENGTH
 FROM INFORMATION_SCHEMA.TABLES
-WHERE TABLE_SCHEMA = 'InventoryControlManagement'
+WHERE TABLE_SCHEMA = 'InventoryControlManagement';
+  
+SELECT table_schema, table_name, round(((data_length + index_length) / 1024 / 1024), 2) AS size_mb
+FROM information_schema.tables
+WHERE table_schema = 'InventoryControlManagement';
+
+ SELECT @@innodb_buffer_pool_size/1024/1024/1024;
+
+SET profiling = 1;  
+
+select * from Products;
+select * from Order_Details order by orderDate;
+  
+  -- queries to run -- 
+  
+  -- Retrieve all products with low stock:
+ SELECT * FROM Products WHERE stock < 15;
+ 
+ -- Retrieve the total value of inventory:
+SELECT SUM(stock * price) AS total_value FROM Products; 
+
+-- Retrieve all orders placed by a specific user:
+SELECT * FROM Order_Details WHERE userId = 5;
+
+-- Retrieve the total revenue generated within a specific date range:
+
+SELECT SUM(p.price * od.quantity) AS total_revenue
+FROM Order_Details od
+JOIN Products p ON od.productId = p.productId
+WHERE od.orderDate BETWEEN '2022-01-01' AND '2022-12-31'; 
 
 
+ -- Retrieve the supplier with the highest number of invoices:
+SELECT s.Sid, s.S_name, COUNT(i.InvoiceId) AS total_invoices
+FROM supplier s
+JOIN Invoice i ON s.Sid = i.Sid
+GROUP BY s.Sid, s.S_name
+ORDER BY total_invoices DESC
+LIMIT 5;
 
+SELECT * FROM Products WHERE categoryId = 2;
+  
+  
+  
+SELECT s.Sid, s.S_name, COUNT(i.InvoiceId) AS total_invoices
+FROM supplier s
+JOIN Invoice i ON s.Sid = i.Sid
+GROUP BY s.Sid, s.S_name
+ORDER BY total_invoices DESC
+LIMIT 4;
+
+SELECT u.userid, u.name, COUNT(od.orderId) AS total_orders
+FROM user u
+JOIN Order_Details od ON u.userid = od.userId
+GROUP BY u.userid, u.name
+ORDER BY total_orders DESC
+LIMIT 5;
+
+ -- Retrieve the total sales and revenue for each product:
+
+SELECT p.productId, p.productName, SUM(od.quantity) AS total_quantity, SUM(od.quantity * p.price) AS total_revenue
+FROM Products p
+JOIN Order_Details od ON p.productId = od.productId
+GROUP BY p.productId, p.productName;
+
+-- Retrieve the products that have never been ordered: 
+SELECT p.productId, p.productName
+FROM Products p
+LEFT JOIN Order_Details od ON p.productId = od.productId
+WHERE od.productId IS NULL;
+
+-- Retrieve the top-selling products based on revenue within a specific date range:
+
+SELECT 
+  p.productId,
+  p.productName,
+  SUM(p.price * od.quantity) AS total_revenue
+FROM Order_Details od
+JOIN Products p ON od.productId = p.productId
+WHERE od.orderDate BETWEEN '2022-01-01' AND '2022-12-31'
+GROUP BY p.productId, p.productName
+ORDER BY total_revenue DESC;
+
+-- Retrieve the total revenue and order count for each month in a given year:
+SELECT 
+  YEAR(od.orderDate) AS year,
+  MONTH(od.orderDate) AS month,
+  SUM(p.price * od.quantity) AS total_revenue,
+  COUNT(*) AS order_count
+FROM Order_Details od
+JOIN Products p ON od.productId = p.productId
+GROUP BY YEAR(od.orderDate), MONTH(od.orderDate)
+ORDER BY YEAR(od.orderDate), MONTH(od.orderDate);
