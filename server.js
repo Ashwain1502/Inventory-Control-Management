@@ -5,8 +5,8 @@ const app = express();
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '8442',
-  database: 'inventorycontrolmanagement'
+  password: 'tinku123',
+  database: 'InventoryControl'
 });
 
 app.use(express.static('public'));
