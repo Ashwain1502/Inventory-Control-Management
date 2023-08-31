@@ -53,22 +53,22 @@ INSERT INTO Products (productId, categoryId, productName, stock, price) VALUES
 (18, 9, 'Silver Ring', 2, 5000),
 (19, 10, 'Cococola', 30, 50),
 (20, 10, 'Dairymilk', 100, 25);
-  
-select * from Products; 
-  
+   
+-- User Table
 
 CREATE TABLE user (userid INT primary key, name VARCHAR(50), phone_no BIGINT,location VARCHAR(50) ); 
  
-INSERT INTO user (userid, name, phone_no, location) VALUES ('1', 'Aryan', '9876543210', 'Delhi');
-INSERT INTO user (userid, name, phone_no, location) VALUES ('2', 'Neha', '8765432109', 'Mumbai');
-INSERT INTO user (userid, name, phone_no, location) VALUES ('3', 'Rajesh', '7654321098', 'Kolkata');
-INSERT INTO user (userid, name, phone_no, location) VALUES ('4', 'Priya', '6543210987', 'Hyderabad');
-INSERT INTO user (userid, name, phone_no, location) VALUES ('5', 'Sanjay', '5432109876', 'Bangalore');
-INSERT INTO user (userid, name, phone_no, location) VALUES ('6', 'Aishwarya', '4321098765', 'Chennai');
-INSERT INTO user (userid, name, phone_no, location) VALUES ('7', 'Vikram', '3210987654', 'Ahmedabad');
-INSERT INTO user (userid, name, phone_no, location) VALUES ('8', 'Nisha', '2109876543', 'Chandigarh');
-INSERT INTO user (userid, name, phone_no, location) VALUES ('9', 'Arjun', '1098765432', 'Jaipur');
-INSERT INTO user (userid, name, phone_no, location) VALUES ('10', 'Sunita', '9876543210', 'Lucknow'); 
+INSERT INTO user (userid, name, phone_no, location) VALUES 
+('1', 'Aryan', '9876543210', 'Delhi'),
+('2', 'Neha', '8765432109', 'Mumbai'),
+('3', 'Rajesh', '7654321098', 'Kolkata'),
+('4', 'Priya', '6543210987', 'Hyderabad'),
+('5', 'Sanjay', '5432109876', 'Bangalore'),
+('6', 'Aishwarya', '4321098765', 'Chennai'),
+('7', 'Vikram', '3210987654', 'Ahmedabad'),
+('8', 'Nisha', '2109876543', 'Chandigarh'),
+('9', 'Arjun', '1098765432', 'Jaipur'),
+('10', 'Sunita', '9876543210', 'Lucknow'); 
 
 -- supplier table 
 CREATE TABLE supplier (Sid INT primary key, S_name VARCHAR(50), Location VARCHAR(50) );
@@ -107,9 +107,10 @@ UPDATE Products
 SET stock = stock + NEW.quantity
 WHERE productId = NEW.productId;  
 
-INSERT INTO Invoice (InvoiceId, Sid, productId, date, quantity) VALUES (1, 1, 1, '2023-05-14', 3);
+
 INSERT INTO Invoice (InvoiceId, Sid, productId, date, quantity) 
 VALUES 
+(1, 1, 1, '2023-05-14', 3),
 (2, 3, 4, '2022-02-20', 7),
 (3, 2, 7, '2022-03-10', 3),
 (4, 5, 2, '2022-04-05', 8),
@@ -128,12 +129,8 @@ VALUES
 (17, 9, 15, '2023-05-07', 6),
 (18, 6, 9, '2023-05-22', 3),
 (19, 4, 1, '2023-05-31', 7),
-(20, 8, 14, '2023-05-28', 5);
-
-INSERT INTO Invoice (InvoiceId, Sid, productId, date, quantity) VALUES (21, 1, 10, '2023-05-14', 25);
--- need add some more data , will do it here
--- till here 
-
+(20, 8, 14, '2023-05-28', 5),
+(21, 1, 10, '2023-05-14', 25);
 
 -- order Details table 
 
