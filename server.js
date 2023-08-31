@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
       return;
     }
     console.log(results);
-    res.render('dd', { results });
+    res.render('product', { results });
   });
 });
 
