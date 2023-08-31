@@ -228,10 +228,6 @@ VALUES
   (10, 2, 2, '2023-05-25', 1);
 
 
-
-
-
-
 select * from Products;
 select * from category;
 select * from Order_Details order by orderDate;
