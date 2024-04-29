@@ -4,9 +4,9 @@ const mysql = require('mysql');
 const app = express();
 const connection = mysql.createConnection({
   host: 'localhost',
-  user: 'root',
-  password: 'tinku123',
-  database: 'InventoryControl'
+  user: 'your_username - usually "root"',
+  password: 'your_password',
+  database: 'your_database_name'
 });
 
 app.use(express.static('public'));
