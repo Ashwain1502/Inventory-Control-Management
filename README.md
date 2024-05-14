@@ -1,5 +1,9 @@
 # Inventory-Control-Management
-This is an Inventory Control Management web application made with HTML, CSS, JavaScript, Node.js, and MySql. We can check no of products in any given time and lot of queries along with it.
+This is an Inventory Control Management web application made with HTML, CSS, JavaScript, Node.js, and MySql. We can check no of products at any given time and a lot of queries along with it.
+
+## Functions Implemented
+1. Users can view the available products and orders taken in the past.
+2. Users can add new products in the inventory.
 
 ## How to  run the application
 1. Download the zip files and extract them
