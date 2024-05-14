@@ -7,8 +7,7 @@
     <title>Inventory Control Management</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
-
-<body>
+<body>       
 
     <!---------------------------- header  ------------------------------->
     
@@ -29,35 +28,31 @@
           <li><a href="/rp"><p>Returned Products</p></a> </li>
         </ul>
     </div>
-  
+
     <!------------------------------ table  ----------------------------------->
-    
+
     <div class="container">
-       <div class="tabs"> 
-          <h1>My Customers</h1>
-            <div id ="hello">
-              <table class="table table-bordered table-striped">
-                <thead>
+      <div class="tabs">
+        <h1>Category </h1>
+          <div id ="hello">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Category ID</th>
+                  <th>Category</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% results.forEach((category) => { %>
                   <tr>
-                    <th>User ID</th>
-                    <th>UserName </th>
-                    <th>Phone Number</th>
-                    <th>location</th>
+                    <td><%= category.categoryId %></td>
+                    <td><%= category.category %></td>
                   </tr>
-                </thead>
-                <tbody>
-                  <% results.forEach((user) => { %>
-                    <tr>
-                      <td><%= user.userid %></td>
-                      <td><%= user.name %></td>
-                      <td><%= user.phone_no %></td>
-                      <td><%= user.location %></td>
-                    </tr>
-                  <% })%>
-                </tbody>
-              </table>
-            </div>
-        </div>
+                <% })%>
+              </tbody>
+            </table>
+          </div>
+      </div>
     </div>
 
 </body>

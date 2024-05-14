@@ -9,60 +9,58 @@
 </head>
 
 <body>
+
+    <!---------------------------- header  ------------------------------->
     
     <div class="header">
-        <div class="comp_name">
-            <h1 id="head_name">INVENTORY CONTROL MANAGEMENT</h1>
-        </div>
+      Your Inventory
     </div>
 
-    <div class="main">
-    <div class="side">
-        <div class="sidenav">
-            <ul>
-                <li><img src="images/reports.png" alt="reports"><a href="/"><p>Products</p> </a></li>
-                <li><img src="images/rewards.png" alt="rewards"><a href="/data"><p>Categories</p></a></li>
-                <li><img src="images/messages.png" alt="messages"> <a href="/invoice"><p>Invoice</p></a></li>
-                <li><img src="images/video-chat.png" alt="video-chat"><a href="/order"><p>Order details</p></a> </li>
-                <li><img src="images/projects.png" alt="projects"><a href="/supplier"><p>Supplier</p></a>  </li>
-                <li><img src="images/members.png" alt="members"><a href="/user"><p>Users</p></a> </li>
-                <li><img src="images/reports.png" alt="members"><a href="/rp"><p>Returned Products</p></a> </li>
-            </ul>
-            <!-- <ul>
-                <li><img src="images/logout.png" alt=""><p>logout</p></li>
-            </ul> -->
-        </div>    
+    <!----------------------------- navigation  --------------------------->
+
+    <div class="sidenav">
+        <ul>
+          <li><a href="/"><p>Products</p></a></li>
+          <li><a href="/category"><p>Categories</p></a></li>
+          <li><a href="/invoice"><p>Invoice</p></a></li>
+          <li><a href="/order"><p>Order details</p></a> </li>
+          <li><a href="/supplier"><p>Supplier</p></a>  </li>
+          <li><a href="/user"><p>Users</p></a> </li>
+          <li><a href="/rp"><p>Returned Products</p></a> </li>
+        </ul>
     </div>
     
-        <div class="tabs">
-            
-              <h1>Returned Products Details</h1>
-              <div id ="hello">
-                <table class="table table-bordered table-striped">
-                  <thead>
-                    <tr>
-                      <th>Return ID</th>
-                      <th>product Name </th>
-                      <th>Quantity</th>
-                      <th>User Name</th>
-                      <th>Date</th>
-                      <!-- Add more table headers as needed -->
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% results.forEach((rp) => { %>
-                      <tr>
-                        <td><%= rp.returnId %></td>
-                        <td><%= rp.productName %></td>
-                        <td><%= rp.quantity %></td>
-                        <td><%= rp.name %></td>
-                        <td><%= rp.returnDate %></td>
-                      </tr>
-                    <% })%>
-                  </tbody>
-                </table>
-              </div>
+    <!------------------------------ table  ----------------------------------->
+    
+    <div class="container">
+      <div class="tabs">            
+        <h1>Returned Products Details</h1>
+          <div id ="hello">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Return ID</th>
+                  <th>product Name </th>
+                  <th>Quantity</th>
+                  <th>User Name</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% results.forEach((rp) => { %>
+                  <tr>
+                    <td><%= rp.returnId %></td>
+                    <td><%= rp.productName %></td>
+                    <td><%= rp.quantity %></td>
+                    <td><%= rp.name %></td>
+                    <td><%= rp.returnDate %></td>
+                  </tr>
+                <% })%>
+              </tbody>
+            </table>
+          </div>
         </div>
+    </div>
 
 </body>
 </html>

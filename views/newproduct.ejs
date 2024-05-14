@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Product</title>
+    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!---------------------------- header  ------------------------------->
+    
+    <div class="header">
+        Add A New Product
+      </div>
+  
+      <!----------------------------- navigation  --------------------------->
+  
+      <div class="sidenav">
+          <ul>
+            <li><a href="/"><p>Products</p></a></li>
+            <li><a href="/category"><p>Categories</p></a></li>
+            <li><a href="/invoice"><p>Invoice</p></a></li>
+            <li><a href="/order"><p>Order details</p></a> </li>
+            <li><a href="/supplier"><p>Supplier</p></a>  </li>
+            <li><a href="/user"><p>Users</p></a> </li>
+            <li><a href="/rp"><p>Returned Products</p></a> </li>
+          </ul>
+      </div>
+  
+    <div class="prod-container">
+        <form action="/addproduct" method="post">
+            <label for="productId">Product ID:</label>
+            <input type="number" id="productId" name="productId" required><br><br>
+            <label for="categoryId">Category ID:</label>
+            <input type="number" id="categoryId" name="categoryId" required><br><br>
+            <label for="productName">Product Name:</label>
+            <input type="text" id="productName" name="productName" required><br><br>
+            <label for="stock">Stock:</label>
+            <input type="number" id="stock" name="stock" required><br><br>
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" required><br><br>
+            <input type="submit" value="Add Product">
+        </form>
+    </div>
+</body>
+</html>

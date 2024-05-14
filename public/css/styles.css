@@ -1,9 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Asap&family=Poppins:wght@400;500;700;800&display=swap');
-@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/css/bootstrap.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Staatliches&display=swap');
 
-
-    *{
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+*{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -12,156 +9,82 @@
 /*---------------------variables------------------*/
 
 :root{
-    --text-color:  #2b3039;
-    --header_bg_color:##dfe0e3;
-    --bg_color:#eaddc6;
+    --text-color:  #ffffffed;
+    --bg_color:#070f2b;
 }
 
 /*--------------------body----------------------*/
 
 body{
+    font-family: 'Nunito', sans-serif;
     color: var(--text-color);
     background-color: var(--bg_color);
-    /* font-family: Georgia, 'Times New Roman', Times, serif; */
 }
 
 /*--------------------header----------------------*/
 
 .header{
     display: flex;
-    height: 15vh;
+    height: 20vh;
     width: 100%;
-    padding-bottom: 0.5rem;
-}
-
-
-.comp_name{
-    display: flex;
-    font-size: 18px;
-    width: 100%;
+    font-size: 4rem;
     justify-content: center;
+    align-items: center;
+    font-family: "Staatliches", sans-serif;
 }
 
-#head_name{
-    float: right;
-    padding-top: 5vh;
-    padding-bottom:5.4vh;
-}
 
-.side{
-    color: #2b3039;
-    width: 20%;
-}
-
-.main{
-    display: flex;
-}
+/*------------------------- sidenav  ---------------------*/
 
 .sidenav{
-    width: 110px;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: 30px 15px;
-    background-color: rgba(255,255,255,0.2);
-    backdrop-filter: blur(5px);
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    transition: width 0.5s;
+    width: 100%;
+    height: 10vh;
+    
 }
 
-ul{
-    list-style: none;
-    padding: 0 15px;
-
+.sidenav ul{
+    display: flex;
+    font-size: 1.25rem;
+    justify-content: space-around;  
 }
 
-ul li{
-    margin: 30px 0;
+.sidenav ul li{
     display: flex;
-    align-items: center;
+    margin-right: 5px;
     justify-content: center;
+    align-items: center;
+}
+
+.sidenav ul li a{
+    color: var(--text-color);
+    text-decoration: none;
     cursor: pointer;
 }
 
-ul li img{
-    width: 30px;
-    margin-right: 0px;
+/*-------------------- table ---------------------*/
+
+.container{
+    width: 100%;
+    margin-bottom: 2rem;
+    background-color: var(--bg_color);
 }
 
-ul li p{
-    white-space: nowrap;
-    display: none;
-}
+.container .tabs .header{
+    font-size: 2.5rem;
 
-.sidenav:hover{
-    width: 250px;
-}
-
-.sidenav:hover ul li p{
-    display: block;
-}
-
-.sidenav:hover ul li{
-    margin-right: 10px;
-}
-
-.sidenav:hover ul li{
-    justify-content: flex-start;
 }
 
 .tabs{
-    width: 70%;
-    float: right;
+    width: 100%;
+    text-align: center;
     height: fit-content;
-    background-color: #2b3039;
-    margin: 2px solid;
-    padding-right: 3rem;
-    color: #eaddc6;
+    background-color: var(--bg_color);
+    padding: 1.5rem;
+    color: var(--text-color);
+    font-size: 1.25rem;
 }
 
-.tab {
-    overflow: hidden;
-    background-color: #f1f1f1;
-    /* background-color: #2b3039; */
-    justify-content: space-between;
-    color: black;
-  }
-  
-  .tab button {
-    font-size: 20px;
-    background-color:#2b3039;
-    color: #eaddc6;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 1rem 2rem;
-    transition: 0.3s;
-  }
-  
-  .tabcontent {
-    display: none;
-    padding: 6px 12px;
-    border-top: none;
-  }
-
-  .sidenav a{
-    text-decoration: none;
-    color: #2b3039;
-  }
-
-  .sidenav a:link a:active a:visited a:hover{
-    color:#2b3039;
-  }
-  
-  #hello{
-    width: 100%;
-  }
-
-.table-bordered{
+.table{
     border: 2px solid white;
     width: 100%;
     border-collapse: collapse; 
@@ -171,12 +94,21 @@ table, th, td{
     border: 2px solid white;
 }
 
-.tabs h1{
-    display: flex;
-    justify-content: center;
-    padding: 1rem 0;
-}
-
 td{
     padding: 2px 0;
+}
+
+h1{
+    margin-bottom: 1rem;
+}
+
+.new{
+    margin: 1em 0 1em 0;
+    font-size: 2rem;
+    text-align: center;  
+}
+
+.new a{
+    text-decoration: none;
+    color: var(--text-color);
 }

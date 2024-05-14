@@ -9,62 +9,59 @@
 </head>
 
 <body>
+
+    <!---------------------------- header  ------------------------------->
     
     <div class="header">
-        <div class="comp_name">
-            <h1 id="head_name">INVENTORY CONTROL MANAGEMENT</h1>
-        </div>
+      Your Inventory
     </div>
 
-    <div class="main">
-    <div class="side">
-        <div class="sidenav">
-            <ul>
-                <li><img src="images/reports.png" alt="reports"><a href="/"><p>Products</p> </a></li>
-                <li><img src="images/rewards.png" alt="rewards"><a href="/data"><p>Categories</p></a></li>
-                <li><img src="images/messages.png" alt="messages"> <a href="/invoice"><p>Invoice</p></a></li>
-                <li><img src="images/video-chat.png" alt="video-chat"><a href="/order"><p>Order details</p></a> </li>
-                <li><img src="images/projects.png" alt="projects"><a href="/supplier"><p>Supplier</p></a>  </li>
-                <li><img src="images/members.png" alt="members"><a href="/user"><p>Users</p></a> </li>
-                <li><img src="images/reports.png" alt="members"><a href="/rp"><p>Returned Products</p></a> </li>
+    <!----------------------------- navigation  --------------------------->
 
-            </ul>
-            <!-- <ul>
-                <li><img src="images/logout.png" alt=""><p>logout</p></li>
-            </ul> -->
-        </div>    
+    <div class="sidenav">
+        <ul>
+          <li><a href="/"><p>Products</p></a></li>
+          <li><a href="/category"><p>Categories</p></a></li>
+          <li><a href="/invoice"><p>Invoice</p></a></li>
+          <li><a href="/order"><p>Order details</p></a> </li>
+          <li><a href="/supplier"><p>Supplier</p></a>  </li>
+          <li><a href="/user"><p>Users</p></a> </li>
+          <li><a href="/rp"><p>Returned Products</p></a> </li>
+        </ul>
+    </div>
+
+    <!------------------------------ table  ----------------------------------->
+    
+    <div class="container">
+      <div class="tabs"> 
+        <h1>All Invoices</h1>
+          <div id ="hello">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Invoice ID</th>
+                  <th>Supplier Name</th>
+                  <th>Product Name</th>
+                  <th>Date</th>
+                  <th>Quantity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% results.forEach((invoice) => { %>
+                  <tr>
+                    <td><%= invoice.InvoiceId %></td>
+                    <td><%= invoice.S_name %></td>
+                    <td><%= invoice.productName %></td>
+                    <td><%= invoice.quantity %></td>
+                    <td><%= invoice.date.toLocaleDateString('en-US', { day: '2-digit', month: '2-digit', year: '2-digit' }) %></td>
+                  </tr>
+                <% })%>
+              </tbody>
+            </table>
+          </div>
+      </div>
     </div>
     
-        <div class="tabs">
-            
-              <h1>All Invoices</h1>
-              <div id ="hello">
-                <table class="table table-bordered table-striped">
-                  <thead>
-                    <tr>
-                      <th>Invoice ID</th>
-                      <th>Supplier Name</th>
-                      <th>Product Name</th>
-                      <th>Date</th>
-                      <th>Quantity</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% results.forEach((invoice) => { %>
-                      <tr>
-                        <td><%= invoice.InvoiceId %></td>
-                        <td><%= invoice.S_name %></td>
-                        <td><%= invoice.productName %></td>
-                        <td><%= invoice.quantity %></td>
-                        <td><%= invoice.date.toLocaleDateString('en-US', { day: '2-digit', month: '2-digit', year: '2-digit' }) %></td>
-                      </tr>
-                    <% })%>
-                  </tbody>
-                </table>
-              </div>
-        </div>
-        
-
 </body>
 </html>
 

@@ -2,15 +2,20 @@ const express = require('express');
 const mysql = require('mysql');
 
 const app = express();
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'tinku123',
-  database: 'InventoryControl'
+  database: 'inventorycontrolmanagement'
 });
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
+
 
 app.get('/', (req, res) => {
   connection.query('SELECT p.productID, p.productName, p.price,p.stock, c.category as category FROM Products p JOIN category c ON p.categoryID = c.categoryID;', (error, results, fields) => {
@@ -23,13 +28,13 @@ app.get('/', (req, res) => {
   });
 });
 
-app.get('/data', (req, res) => {
+app.get('/category', (req, res) => {
   connection.query('SELECT * FROM category', (error, results, fields) => {
     if (error) {
       console.error('Error executing query: ', error);
       return;
     }
-    res.render('index', { results });
+    res.render('category', { results });
   });
 }); 
 
@@ -96,6 +101,25 @@ app.get('/rp', (req, res) => {
     res.render('rp', { results });
   });
 });
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+
+app.get('/newproduct', (req, res) => {
+  res.render('newproduct');
+});
+
+app.post('/addproduct', (req, res) => {
+  const { productId, categoryId, productName, stock, price } = req.body;
+  const sql = 'INSERT INTO Products (productId, categoryId, productName, stock, price) VALUES (?, ?, ?, ?, ?)';
+  connection.query(sql, [productId, categoryId, productName, stock, price], (error, results, fields) => {
+      if (error) {
+          console.error('Error inserting product: ', error); // Log detailed error message
+          return res.status(500).send('Error inserting product: ' + error.message); // Send error message to client
+      }
+      console.log('Product inserted successfully:', results);
+      res.redirect('/newproduct');
+  });
+});
+
+
+app.listen(5454, () => {
+  console.log('Server is running on port 5454');
 });
