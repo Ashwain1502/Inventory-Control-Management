@@ -8,9 +8,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const connection = mysql.createConnection({
   host: 'localhost',
+<<<<<<< HEAD
   user: 'root',
   password: 'tinku123',
   database: 'inventorycontrolmanagement'
+=======
+  user: 'your_username - usually "root"',
+  password: 'your_password',
+  database: 'your_database_name'
+>>>>>>> dd663c4d76edd5827370282625ff781356009fc3
 });
 
 app.use(express.static('public'));
