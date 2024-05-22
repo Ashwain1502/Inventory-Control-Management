@@ -5,7 +5,7 @@ An Inventory Control Management web application developed using HTML, CSS, JavaS
 ## Functions Implemented
 1. Users can view the available products and orders taken in the past.
 2. Users can add new products to the inventory.
-3. Users can see product details, order details, stock left etc.
+3. Users can see product details, order details, stock left, etc.
 
 ## How to  run the application
 1. Download the zip files and extract them
@@ -14,4 +14,4 @@ An Inventory Control Management web application developed using HTML, CSS, JavaS
 4. Run the file by the 'npm start' command.
 
 ## Contributors
-Ashwani Kumar (ashwink1502@gmail.com)
+Ashwani Kumar (ashwink1502@gmail.com).
