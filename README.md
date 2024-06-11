@@ -12,6 +12,5 @@ An Inventory Control Management web application developed using HTML, CSS, JavaS
 3. Put your user, password, and database name in the server.js file
 4. Run the file by the 'npm start' command.
 
-## Contributors
-
-Ashwani Kumar (ashwink1502@gmail.com).
+> ## Contributors
+> Ashwani Kumar (ashwink1502@gmail.com).
