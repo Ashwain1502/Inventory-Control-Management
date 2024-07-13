@@ -1,5 +1,5 @@
 # Inventory-Control-Management
-An Inventory Control Management web application developed using HTML, CSS, JavaScript, Node.js, and MySql. Users can check number of the products at any given time and many queries, like checking sales for the past day, month, and year.
+An Inventory Control Management web application developed using HTML, CSS, JavaScript, Node.js, and MySql. Users can check the number of products at any given time and many queries, like checking sales for the past day, month, and year.
 
 ## Functions Implemented
 1. Users can view the available products and orders taken in the past.
@@ -11,6 +11,7 @@ An Inventory Control Management web application developed using HTML, CSS, JavaS
 2. Save the database file in your SQL workbench application.
 3. Put your username, password, and database name in the server.js file.
 4. Run the file by the 'npm start' command.
+5. It will be shown on the mentioned port.
 
 > ## Contributors
 > Ashwani Kumar (ashwink1502@gmail.com).
