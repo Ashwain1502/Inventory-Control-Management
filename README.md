@@ -13,5 +13,5 @@ An Inventory Control Management web application developed using HTML, CSS, JavaS
 4. Run the file by the 'npm start' command.
 5. It will be shown on the mentioned port.
 
-> ## Contributors
+> ### Contributors
 > Ashwani Kumar (ashwink1502@gmail.com).
