@@ -201,4 +201,3 @@ app.get('/queries/:queryType', (req, res) => {
     res.render('query', { results });
   });
 });
-
