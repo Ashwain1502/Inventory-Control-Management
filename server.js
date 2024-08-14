@@ -202,6 +202,3 @@ app.get('/queries/:queryType', (req, res) => {
   });
 });
 
-app.listen(5454, () => {
-  console.log('Server is running on port 5454');
-});
