@@ -7,10 +7,10 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'tinku123',
-  database: 'inventorycontrolmanagement'
+  host: 'sql12.freemysqlhosting.net',
+  user: 'sql12725867',
+  password: 'mqW2PEMRQC',
+  database: 'sql12725867'
 });
 
 app.use(express.static('public'));
@@ -201,13 +201,6 @@ app.get('/queries/:queryType', (req, res) => {
     res.render('query', { results });
   });
 });
-
-function fetchQueryResult() {
-  const queryType = document.getElementById('queryDropdown').value;
-  if (queryType) {
-    window.location.href = `/queries/${queryType}`;
-  }
-}
 
 app.listen(5454, () => {
   console.log('Server is running on port 5454');
