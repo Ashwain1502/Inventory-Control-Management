@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #070f2b;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #ffffffed;
+        }
+
+        table {
+            width: 90%;
+            max-width: 1000px;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        thead {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        th {
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f4f4f9;
+        }
+
+        tbody tr:hover {
+            background-color: #e9ecef;
+        }
+
+        tbody td {
+            border-bottom: 1px solid #ddd;
+        }
+
+        tbody td:last-child {
+            border-bottom: 0;
+        }
+
+        table {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+  <h1>Query Results</h1>
+  <table>
+    <thead>
+      <tr>
+        <% for(let field in results[0]) { %>
+          <th><%= field %></th>
+        <% } %>
+      </tr>
+    </thead>
+    <tbody>
+      <% results.forEach(function(row) { %>
+        <tr>
+          <% for(let field in row) { %>
+            <td><%= row[field] %></td>
+          <% } %>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</body>
+</html>

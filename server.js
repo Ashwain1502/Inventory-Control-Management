@@ -8,15 +8,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const connection = mysql.createConnection({
   host: 'localhost',
-<<<<<<< HEAD
   user: 'root',
   password: 'tinku123',
   database: 'inventorycontrolmanagement'
-=======
-  user: 'your_username - usually "root"',
-  password: 'your_password',
-  database: 'your_database_name'
->>>>>>> dd663c4d76edd5827370282625ff781356009fc3
 });
 
 app.use(express.static('public'));
@@ -29,7 +23,6 @@ app.get('/', (req, res) => {
       console.error('Error executing query: ', error);
       return;
     }
-    console.log(results);
     res.render('product', { results });
   });
 });
@@ -71,7 +64,6 @@ app.get('/order', (req, res) => {
       console.error('Error executing query: ', error);
       return;
     }
-    console.log(results);
     res.render('orders', { results });
   });
 });
@@ -81,8 +73,7 @@ app.get('/supplier', (req, res) => {
     if (error) {
       console.error('Error executing query: ', error);
       return;
-    }
-    
+    } 
     res.render('supplier', { results });
   });
 });
@@ -103,7 +94,6 @@ app.get('/rp', (req, res) => {
       console.error('Error executing query: ', error);
       return;
     }
-    console.log(results);
     res.render('rp', { results });
   });
 });
@@ -125,6 +115,99 @@ app.post('/addproduct', (req, res) => {
   });
 });
 
+app.get('/queries/:queryType', (req, res) => {
+  const queryType = req.params.queryType;
+  let sql = '';
+
+  switch (queryType) {
+    case 'lowStock':
+      sql = 'SELECT * FROM Products WHERE stock < 15;';
+      break;
+    case 'totalValue':
+      sql = 'SELECT SUM(stock * price) AS total_value FROM Products;';
+      break;
+    case 'userOrders':
+      sql = 'SELECT * FROM Order_Details WHERE userId = 5;';
+      break;
+    case 'totalRevenueDateRange':
+      sql = `SELECT SUM(p.price * od.quantity) AS total_revenue
+             FROM Order_Details od
+             JOIN Products p ON od.productId = p.productId
+             WHERE od.orderDate BETWEEN '2022-01-01' AND '2022-12-31';`;
+      break;
+    case 'topSuppliers':
+      sql = `SELECT s.Sid, s.S_name, COUNT(i.InvoiceId) AS total_invoices
+             FROM supplier s
+             JOIN Invoice i ON s.Sid = i.Sid
+             GROUP BY s.Sid, s.S_name
+             ORDER BY total_invoices DESC
+             LIMIT 5;`;
+      break;
+    case 'categoryProducts':
+      sql = 'SELECT * FROM Products WHERE categoryId = 2;';
+      break;
+    case 'topSuppliers4':
+      sql = `SELECT s.Sid, s.S_name, COUNT(i.InvoiceId) AS total_invoices
+             FROM supplier s
+             JOIN Invoice i ON s.Sid = i.Sid
+             GROUP BY s.Sid, s.S_name
+             ORDER BY total_invoices DESC
+             LIMIT 4;`;
+      break;
+    case 'userOrdersCount':
+      sql = `SELECT u.userid, u.name, COUNT(od.orderId) AS total_orders
+             FROM user u
+             JOIN Order_Details od ON u.userid = od.userId
+             GROUP BY u.userid, u.name
+             ORDER BY total_orders DESC
+             LIMIT 5;`;
+      break;
+    case 'salesAndRevenue':
+      sql = `SELECT p.productId, p.productName, SUM(od.quantity) AS total_quantity, SUM(od.quantity * p.price) AS total_revenue
+             FROM Products p
+             JOIN Order_Details od ON p.productId = od.productId
+             GROUP BY p.productId, p.productName;`;
+      break;
+    case 'neverOrdered':
+      sql = `SELECT p.productId, p.productName
+             FROM Products p
+             LEFT JOIN Order_Details od ON p.productId = od.productId
+             WHERE od.productId IS NULL;`;
+      break;
+    case 'topSelling':
+      sql = `SELECT p.productId, p.productName, SUM(p.price * od.quantity) AS total_revenue
+             FROM Order_Details od
+             JOIN Products p ON od.productId = p.productId
+             WHERE od.orderDate BETWEEN '2022-01-01' AND '2022-12-31'
+             GROUP BY p.productId, p.productName
+             ORDER BY total_revenue DESC;`;
+      break;
+    case 'monthlyRevenue':
+      sql = `SELECT YEAR(od.orderDate) AS year, MONTH(od.orderDate) AS month, SUM(p.price * od.quantity) AS total_revenue, COUNT(*) AS order_count
+             FROM Order_Details od
+             JOIN Products p ON od.productId = p.productId
+             GROUP BY YEAR(od.orderDate), MONTH(od.orderDate)
+             ORDER BY YEAR(od.orderDate), MONTH(od.orderDate);`;
+      break;
+    default:
+      return res.status(400).send('Invalid query type');
+  }
+
+  connection.query(sql, (error, results, fields) => {
+    if (error) {
+      console.error('Error executing query: ', error);
+      return res.status(500).send('Error executing query');
+    }
+    res.render('query', { results });
+  });
+});
+
+function fetchQueryResult() {
+  const queryType = document.getElementById('queryDropdown').value;
+  if (queryType) {
+    window.location.href = `/queries/${queryType}`;
+  }
+}
 
 app.listen(5454, () => {
   console.log('Server is running on port 5454');

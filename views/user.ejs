@@ -13,12 +13,31 @@
     <!---------------------------- header  ------------------------------->
     
     <div class="header">
-      Your Inventory
+      <div class="left">
+        Your Inventory
+      </div>
+      <div class="right">
+        <select id="queryDropdown" onchange="fetchQueryResult()">
+          <option value="" disabled selected>Select a Query</option>
+          <option value="lowStock">Retrieve all products with low stock</option>
+          <option value="totalValue">Retrieve the total value of inventory</option>
+          <option value="userOrders">Retrieve all orders placed by a specific user</option>
+          <option value="totalRevenueDateRange">Retrieve the total revenue within a date range</option>
+          <option value="topSuppliers">Retrieve the supplier with the highest number of invoices</option>
+          <option value="categoryProducts">Retrieve products by category</option>
+          <option value="topSuppliers4">Retrieve the top 4 suppliers by invoices</option>
+          <option value="userOrdersCount">Retrieve total orders by user</option>
+          <option value="salesAndRevenue">Retrieve the total sales and revenue for each product</option>
+          <option value="neverOrdered">Retrieve products that have never been ordered</option>
+          <option value="topSelling">Retrieve the top-selling products within a date range</option>
+          <option value="monthlyRevenue">Retrieve monthly revenue and order count</option>
+        </select>
+      </div>
     </div>
 
     <!----------------------------- navigation  --------------------------->
 
-    <div class="sidenav">
+    <div class="sidebar">
         <ul>
           <li><a href="/"><p>Products</p></a></li>
           <li><a href="/category"><p>Categories</p></a></li>
@@ -32,7 +51,6 @@
   
     <!------------------------------ table  ----------------------------------->
     
-    <div class="container">
        <div class="tabs"> 
           <h1>My Customers</h1>
             <div id ="hello">
@@ -58,7 +76,15 @@
               </table>
             </div>
         </div>
-    </div>
+
+    <script>
+      function fetchQueryResult() {
+        const queryType = document.getElementById('queryDropdown').value;
+        if (queryType) {
+          window.location.href = `/queries/${queryType}`;
+        }
+      }
+    </script>
 
 </body>
 </html>
