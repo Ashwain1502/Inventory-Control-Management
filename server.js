@@ -1,5 +1,6 @@
 const express = require('express');
 const mysql = require('mysql');
+const path = require('path');
 
 const app = express();
 const bodyParser = require('body-parser');
@@ -13,9 +14,11 @@ const connection = mysql.createConnection({
   database: 'sql12725867'
 });
 
-app.use(express.static('public'));
-app.set('view engine', 'ejs');
+app.use(express.static(path.join(__dirname, 'public')));
 
+// Set up EJS as the view engine
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 app.get('/', (req, res) => {
   connection.query('SELECT p.productID, p.productName, p.price,p.stock, c.category as category FROM Products p JOIN category c ON p.categoryID = c.categoryID;', (error, results, fields) => {
@@ -201,3 +204,7 @@ app.get('/queries/:queryType', (req, res) => {
     res.render('query', { results });
   });
 });
+
+app.listen(5454, () => {
+  console.log('server running');
+})
