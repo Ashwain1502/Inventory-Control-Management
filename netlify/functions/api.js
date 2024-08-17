@@ -1,5 +1,6 @@
 import express from 'express';
 import mysql from 'mysql';
+import path from 'path';
 import serverless from 'serverless-http';
 
 // Create an instance of the Express application
@@ -12,6 +13,13 @@ const connection = mysql.createConnection({
   password: 'mqW2PEMRQC',
   database: 'sql12725867'
 });
+
+// Set the view engine to ejs and specify the views directory
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '..', '..', 'views'));
+
+// Set the public directory for static files
+app.use(express.static(path.join(__dirname, '..', '..', 'public')));
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -172,5 +180,16 @@ app.get('/queries/:queryType', (req, res) => {
   });
 });
 
-// Export the handler function
+// Serve EJS views and static files
+
+app.get('/views/:viewName', (req, res) => {
+  const viewName = req.params.viewName;
+  res.render(viewName);
+});
+
+app.get('/public/:fileName', (req, res) => {
+  const fileName = req.params.fileName;
+  res.sendFile(path.join(__dirname, '..', '..', 'public', fileName));
+});
+
 export const handler = serverless(app);
