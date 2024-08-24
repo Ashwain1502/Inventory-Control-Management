@@ -15,4 +15,4 @@ An **Inventory Control Management** web application developed using HTML, CSS, J
 5. It will be shown on the specilied port.
 
 > ### Contributors
-> Ashwani Kumar (ashwink1502@gmail.com).
+> Ashwani Kumar (ashwink1502@gmail.com)
